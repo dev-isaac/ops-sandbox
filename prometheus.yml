@@ -16,3 +16,8 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets: ["app:80"]
+
+  - job_name: "gpus"
+    scrape_interval: 10s
+    static_configs:
+      - targets: ["gpu-exporter:9400"]
