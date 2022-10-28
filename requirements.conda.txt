@@ -28,6 +28,8 @@ openssl=3.0.5=h166bdaf_2
 pathspec=0.10.1=pyhd8ed1ab_0
 pip=22.2.2=py310h06a4308_0
 platformdirs=2.5.2=pyhd8ed1ab_1
+prometheus-fastapi-instrumentator=5.8.1=pyhd8ed1ab_0
+prometheus_client=0.14.1=py310h06a4308_0
 pydantic=1.10.2=py310h5764c6d_1
 python=3.10.6=ha86cf86_0_cpython
 python_abi=3.10=2_cp310

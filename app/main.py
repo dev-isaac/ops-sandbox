@@ -1,8 +1,15 @@
 from typing import Union
 
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator, metrics
+
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def on_startup():
+    Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/")

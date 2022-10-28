@@ -25,8 +25,6 @@ services:
     image: prom/prometheus:v2.39.1
     container_name: prometheus
     restart: unless-stopped
-    ports:
-      - 9090:9090
     networks:
       - monitoring
     volumes:
@@ -38,3 +36,16 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
+    ports:
+      - 15999:9090
+
+  my-app:
+    image: my-app:0.1.0
+    container_name: app
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    ports:
+      - 16000:80
+    networks:
+      - monitoring
