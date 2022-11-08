@@ -30,8 +30,13 @@ services:
       - "9400"
     networks:
       - monitoring
-    cap_add:
-      - SYS_ADMIN
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
 
   prometheus:
     image: prom/prometheus:v2.39.1
