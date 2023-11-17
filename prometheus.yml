@@ -5,9 +5,19 @@ scrape_configs:
   - job_name: "prometheus"
     scrape_interval: 10s
     static_configs:
-    - targets: ["localhost:9090"]
+      - targets: ["localhost:9090"]
 
   - job_name: "node"
     scrape_interval: 10s
     static_configs:
-    - targets: ["node-exporter:9100"]
+      - targets: ["node-exporter:9100"]
+
+  #- job_name: "app"
+  #  scrape_interval: 10s
+  #  static_configs:
+  #    - targets: ["app:80"]
+
+  - job_name: "gpus"
+    scrape_interval: 10s
+    static_configs:
+      - targets: ["gpu-exporter:9400"]
