@@ -22,8 +22,7 @@ services:
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
 
   gpu-exporter:
-    image: nvidia/dcgm-exporter:3.0.4-3.0.0-ubuntu20.04
-    # image: nvidia/dcgm-exporter:1.7.2-2.0.0-rc.8-ubuntu18.04
+    image: nvidia/dcgm-exporter:1.7.2-2.0.0-rc.8-ubuntu18.04
     container_name: gpu-exporter
     restart: unless-stopped
     expose:
@@ -46,7 +45,8 @@ services:
       - monitoring
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus_data:/prometheus
+      - /data/shared/prometheus_data:/prometheus # for guanine
+      #- /service_data/prometheus_data:/prometheus # for glycine
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -54,15 +54,16 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
     ports:
-      - 16002:9090
+      - 15999:9090 # for guanine
+      #- 16002:9090 # for glycine
 
-  my-app:
-    image: my-app:0.1.0
-    container_name: app
-    build:
-      context: .
-      dockerfile: app.Dockerfile
-    ports:
-      - 16001:80
-    networks:
-      - monitoring
+  #my-app:
+  #  image: my-app:0.1.0
+  #  container_name: app
+  #  build:
+  #    context: .
+  #    dockerfile: app.Dockerfile
+  #  ports:
+  #    - 16001:80
+  #  networks:
+  #    - monitoring
